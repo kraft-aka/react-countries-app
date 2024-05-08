@@ -12,7 +12,7 @@ const CountriesRoll = () => {
   console.log(countriesData);
 
   return (
-    <div>
+    <div className={styles["countries-container"]}>
       {countriesData && countriesData.length > 0 ? (countriesData.map((country) => (
         <CountryCard
           key={uuid()}
