@@ -19,7 +19,7 @@ const CountriesRoll = () => {
           name={country?.name?.common}
           city={country?.capital}
           flag={country?.flags.svg}
-          id={uuid()}
+          id={country?.name?.common}
         />
       ))) : (<h2>loading...</h2>)}
     </div>
