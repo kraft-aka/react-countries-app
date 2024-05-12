@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./CountryCard.module.css";
 
-const CountryCard = ({ name, city, flag }) => {
+const CountryCard = ({ name, city, flag,id }) => {
+
+  
  
   return (
     <div className={styles['card-container']}>
@@ -10,7 +13,7 @@ const CountryCard = ({ name, city, flag }) => {
         <h4 className={styles["card-city"]}>{city}</h4>
       </header>
       <img src={flag} alt="image of country's flag" className={styles["card-flag"]} />
-      <button className={styles["card-btn"]}>Learn More...</button>
+      <Link to={`countries/${id}`} className={styles["card-btn"]}>Learn More...</Link>
     </div>
   );
 };

@@ -1,10 +1,20 @@
-import React from 'react'
-import styles from './Country.module.css'
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import styles from "./Country.module.css";
 
 const Country = () => {
-  return (
-    <div>Country</div>
-  )
-}
+  const { id } = useParams();
 
-export default Country
+
+  console.log(id);
+
+  return (
+    <div>
+      Country
+      {id}
+    </div>
+  );
+};
+
+export default Country;
