@@ -1,9 +1,8 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, createContext } from "react";
 
 const DataContext = createContext([]);
 
 const DataProvider = ({ children }) => {
-
   const [countriesData, setCountriesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
@@ -25,13 +24,21 @@ const DataProvider = ({ children }) => {
     fetchCountriesData();
   }, []);
 
-  console.log(countriesData)
-
-
   return (
-    <DataContext.Provider value={{ countriesData, setCountriesData, errorMsg, setErrorMsg, isLoading, setIsLoading }}>{children}</DataContext.Provider>
-  )
-}
+    <DataContext.Provider
+      value={{
+        countriesData,
+        setCountriesData,
+        errorMsg,
+        setErrorMsg,
+        isLoading,
+        setIsLoading,
+      }}
+    >
+      {children}
+    </DataContext.Provider>
+  );
+};
 
-export { DataContext }
-export default DataProvider
+export { DataContext };
+export default DataProvider;
