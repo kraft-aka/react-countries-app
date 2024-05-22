@@ -8,12 +8,29 @@ import styles from "./Navbar.module.css";
 
 const NavbarComponent = () => {
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand='md' fixed="top" >
+    <Navbar
+      bg="dark"
+      data-bs-theme="dark"
+      expand="md"
+      fixed="top"
+      className="bg-body-tertiary"
+    >
       <Container>
-        <Navbar.Brand href='#'>Countries App</Navbar.Brand>
+        <Navbar.Brand href="/">Countries App</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link><Link to="/"></Link>Home</Nav.Link>
-          <Nav.Link><Link to="/game"></Link>Play Game</Nav.Link>
+          <Nav.Link as={Link} to="/">
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/game">
+            Play Game
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="https://github.com/kraft-aka/react-countries-app"
+            target="_blank"
+          >
+            Code
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
