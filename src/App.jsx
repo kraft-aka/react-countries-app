@@ -4,13 +4,13 @@ import Game from "./pages/Game/Game";
 import DataProvider from "./providers/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Country from "./pages/Country/Country";
-import Navbar from "./components/Navbar/Navbar";
+import NavbarComponent from "./components/Navbar/NavbarComponent";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <NavbarComponent />
         <h1>Hello Countries App</h1>
         <DataProvider>
           <Routes>
