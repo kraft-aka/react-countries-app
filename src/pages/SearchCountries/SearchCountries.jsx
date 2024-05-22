@@ -5,7 +5,6 @@ import CountriesRoll from "../../components/CountriesRoll/CountriesRoll";
 const SearchCountries = () => {
   return (
     <div>
-      SearchCountries
       <CountriesRoll />
     </div>
   );
