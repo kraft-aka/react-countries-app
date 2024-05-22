@@ -20,10 +20,12 @@ const CountriesRoll = () => {
   }
 
   return (
-    <>
-      <Form>
+    <div className={styles["container-roll"]}>
+      <Form style={{ width: "64%" }}>
         <Form.Group className="m-3">
-          <Form.Label htmlFor="search" className="fs-5"  >Search the Country</Form.Label>
+          <Form.Label htmlFor="search" className="fs-5">
+            Search the Country
+          </Form.Label>
           <Form.Control
             id="search"
             type="text"
@@ -49,7 +51,7 @@ const CountriesRoll = () => {
           <h2>loading...</h2>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
