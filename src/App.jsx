@@ -1,5 +1,4 @@
 import Home from "./pages/Home/Home";
-import SearchCountries from "./pages/SearchCountries/SearchCountries";
 import Game from "./pages/Game/Game";
 import DataProvider from "./providers/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
