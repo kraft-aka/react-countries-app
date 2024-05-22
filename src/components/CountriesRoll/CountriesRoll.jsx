@@ -3,6 +3,8 @@ import CountryCard from "../CountryCard/CountryCard";
 import styles from "./CountriesRoll.module.css";
 import { DataContext } from "../../providers/DataProvider";
 import { v4 as uuid } from "uuid";
+import Form from "react-bootstrap/Form";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const CountriesRoll = () => {
   const [name, setName] = useState("");
@@ -19,16 +21,18 @@ const CountriesRoll = () => {
 
   return (
     <>
-      <form>
-        <label htmlFor="search">Search</label>
-        <input
-          id="search"
-          type="text"
-          placeholder="type here the country's name"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        />
-      </form>
+      <Form>
+        <Form.Group className="m-3">
+          <Form.Label htmlFor="search" className="fs-5"  >Search the Country</Form.Label>
+          <Form.Control
+            id="search"
+            type="text"
+            placeholder="type here the country's name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+        </Form.Group>
+      </Form>
       {!filteredData && !countriesData && <p>Not found</p>}
       <div className={styles["countries-container"]}>
         {filteredData && filteredData.length > 0 ? (
