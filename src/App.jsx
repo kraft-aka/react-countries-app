@@ -11,7 +11,7 @@ function App() {
     <>
       <BrowserRouter>
         <NavbarComponent />
-        <h1>Hello Countries App</h1>
+        <h1 className="title">Countries App</h1>
         <DataProvider>
           <Routes>
             <Route path="/" element={<Home />}>

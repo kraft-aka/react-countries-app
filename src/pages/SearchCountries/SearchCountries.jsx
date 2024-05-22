@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './SearchCountries.module.css'
+import './SearchCountries.css'
 import CountriesRoll from '../../components/CountriesRoll/CountriesRoll'
 
 const SearchCountries = () => {
