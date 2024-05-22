@@ -4,6 +4,7 @@ import styles from "./CountriesRoll.module.css";
 import { DataContext } from "../../providers/DataProvider";
 import { v4 as uuid } from "uuid";
 import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CountriesRoll = () => {
@@ -16,7 +17,15 @@ const CountriesRoll = () => {
   );
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return (
+      <Spinner
+        animation="border"
+        variant="secondary"
+        size="lg"
+        className="m-5"
+        style={{ position: "relative", left: "50%" }}
+      />
+    );
   }
 
   return (
@@ -48,7 +57,7 @@ const CountriesRoll = () => {
             />
           ))
         ) : (
-          <h2>loading...</h2>
+          <Spinner animation="border" variant="secondary" size="lg" />
         )}
       </div>
     </div>
