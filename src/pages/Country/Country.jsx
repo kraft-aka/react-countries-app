@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DataContext } from "../../providers/DataProvider";
+import { Container, Card, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Country.module.css";
 
 const Country = () => {
@@ -13,17 +15,23 @@ const Country = () => {
     (country) => country.name?.common === id
   );
 
-  const navigateBack = () => navigate(-1)
+  const navigateBack = () => navigate(-1);
 
   console.log(findOneCountry);
 
   return (
-    <div>
-      {id}
-      {findOneCountry?.area}m2
-      {findOneCountry?.population}
-      <button onClick={navigateBack}>Back</button>
-    </div>
+    <Container className="country-container" style={{ width: '80rem', display: 'flex', flexDirection: 'column' }}>
+      <Card className="shadow-sm bg-white rounded" >
+         <Card.Body>
+          <Card.Title>{id}</Card.Title>
+          <Card.Title>Area</Card.Title>
+          <Card.Text>{findOneCountry?.area}m2</Card.Text>
+        
+        {findOneCountry?.population}
+        <button onClick={navigateBack}>Back</button>
+          </Card.Body> 
+      </Card>
+    </Container>
   );
 };
 
