@@ -11,7 +11,7 @@ const CountryCard = ({ name, city, flag, id }) => {
       style={{ width: "18rem", height: "25rem" }}
       border="secondary"
       variant="info"
-      className="card text-center"
+      className="card-c text-center"
     >
       <Card.Img
         variant="top"
