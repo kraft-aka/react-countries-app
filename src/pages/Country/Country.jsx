@@ -1,21 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DataContext } from "../../providers/DataProvider";
 import { Container, Card, Button, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Country.module.css";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 const Country = () => {
   const { countriesData } = useContext(DataContext);
   const { id } = useParams();
   const navigate = useNavigate();
+  const mapRef = useRef();
+
+  const navigateBack = () => navigate(-1);
 
   // find one country match id with country name
   const findOneCountry = countriesData.find(
     (country) => country.name?.common === id
   );
 
-  const navigateBack = () => navigate(-1);
+  const lat = findOneCountry?.capitalInfo?.latlng[0];
+  const long = findOneCountry?.capitalInfo?.latlng[1];
+
+  if (!findOneCountry) {
+    return null;
+  }
+
+  //console.log(lat, long);
 
   console.log(findOneCountry);
 
@@ -77,8 +89,23 @@ const Country = () => {
         </Col>
         <Col>
           <Card>
-            <Card.Body>
+            <Card.Body style={{ width: "30rem" }}>
               <Card.Title className="text-center">Map</Card.Title>
+              <MapContainer
+                center={[lat, long]}
+                zoom={7}
+                ref={mapRef}
+                style={{ height: "700px", width: "100%" }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                >
+                  <Marker position={[lat, long]}>
+                    <Popup >{findOneCountry?.capital} - Capital City</Popup>
+                  </Marker>
+                </TileLayer>
+              </MapContainer>
             </Card.Body>
           </Card>
         </Col>
