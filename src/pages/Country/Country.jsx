@@ -50,7 +50,7 @@ const Country = () => {
               </Card.Title>
               <Card.Title className="fs-2">
                 <span className="badge text-secondary fs-5">Borders with:</span>
-                {findOneCountry?.borders.map((land) => (
+                {findOneCountry?.borders?.map((land) => (
                   <li key={land}>{land}</li>
                 ))}
               </Card.Title>
