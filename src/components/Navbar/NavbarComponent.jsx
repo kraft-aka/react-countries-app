@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Button } from "react-bootstrap";
 
 import styles from "./Navbar.module.css";
 
@@ -32,6 +33,12 @@ const NavbarComponent = () => {
             Code
           </Nav.Link>
         </Nav>
+        <Button
+          variant="outline-success"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          Back to top
+        </Button>
       </Container>
     </Navbar>
   );
