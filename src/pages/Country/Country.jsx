@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { DataContext } from "../../providers/DataProvider";
 import { Container, Card, Button, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./Country.module.css";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import styles from "./Country.module.css";
 
 const Country = () => {
   const { countriesData } = useContext(DataContext);
@@ -26,8 +26,6 @@ const Country = () => {
   if (!findOneCountry) {
     return null;
   }
-
-  //console.log(lat, long);
 
   console.log(findOneCountry);
 
@@ -50,11 +48,11 @@ const Country = () => {
               </Card.Title>
               <Card.Title className="fs-2">
                 <span className="badge text-secondary fs-5">Area:</span>
-                {findOneCountry?.area}m2
+                {findOneCountry?.area?.toLocaleString()}m2
               </Card.Title>
               <Card.Title className="fs-2">
                 <span className="badge text-secondary fs-5">Population:</span>
-                {findOneCountry?.population}
+                {findOneCountry?.population.toLocaleString()}
               </Card.Title>
               <Card.Title className="fs-2">
                 <span className="badge text-secondary fs-5">Region:</span>
@@ -77,7 +75,7 @@ const Country = () => {
                 rounded
                 src={findOneCountry?.flags.svg}
                 alt="image of country's flag"
-                style={{ height: "10rem", width: "auto" }}
+                style={{ height: "5rem", width: "auto" }}
                 className="m-3"
               />
 
@@ -102,7 +100,7 @@ const Country = () => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 >
                   <Marker position={[lat, long]}>
-                    <Popup >{findOneCountry?.capital} - Capital City</Popup>
+                    <Popup>{findOneCountry?.capital} - Capital City</Popup>
                   </Marker>
                 </TileLayer>
               </MapContainer>
