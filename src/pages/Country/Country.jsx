@@ -1,7 +1,15 @@
 import React, { useContext, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DataContext } from "../../providers/DataProvider";
-import { Container, Card, Button, Row, Col, Image } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col,
+  Image,
+  Table,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -36,7 +44,7 @@ const Country = () => {
           <Card className="shadow-sm bg-white rounded">
             <Card.Body className="d-flex flex-column justify-content-between align-items-center">
               <Card.Title className="text-center fs-1 m-2">Details</Card.Title>
-              <Card.Title className="fs-2">
+              {/*<Card.Title className="fs-2">
                 <span className="badge text-secondary fs-5">Country name:</span>{" "}
                 {id}
               </Card.Title>
@@ -70,7 +78,48 @@ const Country = () => {
                   Object.values(findOneCountry?.languages).map((lang) => (
                     <li key={lang}>{lang}</li>
                   ))}
-              </Card.Title>
+                  </Card.Title>*/}
+              <Table responsive='lg' striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Key Points</th>
+                    <th>Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Country Name</td>
+                    <td className="fw-bold">{id}</td>
+                  </tr>
+                  <tr>
+                    <td>Capital City</td>
+                    <td className="fw-bold">{findOneCountry?.capital}</td>
+                  </tr>
+                  <tr>
+                    <td>Area</td>
+                    <td className="fw-bold">{findOneCountry?.area?.toLocaleString()}m2</td>
+                  </tr>
+                  <tr>
+                    <td>Population</td>
+                    <td className="fw-bold">{findOneCountry?.population?.toLocaleString()}</td>
+                  </tr>
+                  <tr>
+                    <td>Region</td>
+                    <td className="fw-bold">{findOneCountry?.continents[0]}</td>
+                  </tr>
+                  <tr>
+                    <td>Borders </td>
+                    <td className="fw-bold">{findOneCountry?.borders.toString()}</td>
+                  </tr>
+                  <tr>
+                    <td>Language</td>
+                    <td className="fw-bold">{findOneCountry &&
+                  Object.values(findOneCountry?.languages).map((lang) => (
+                    <div key={lang}>{lang}</div>
+                  ))}</td>
+                  </tr>
+                </tbody>
+              </Table>
               <Image
                 rounded
                 src={findOneCountry?.flags.svg}
