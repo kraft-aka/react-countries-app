@@ -1,11 +1,11 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext} from "react";
 import { DataContext } from "../../providers/DataProvider";
-import styles from "./Game.module.css";
+import { Form, Button, Container, Card } from "react-bootstrap";
+import "./Game.css";
 
 const Game = () => {
   const [gameStart, setGameStart] = useState(false);
   const [currentCountry, setCurrentCountry] = useState(0);
-  const [input, setInput] = useState("");
   const [count, setCount] = useState(0);
   const [countCountries, setCountCountries] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -77,34 +77,55 @@ const Game = () => {
   // }, [submitInput]);
 
   return (
-    <div>
-      <button type="button" onClick={handleStartGame}>
+    <Container>
+      <Button
+        type="button"
+        variant="dark"
+        className="mt-5"
+        onClick={handleStartGame}
+      >
         {gameStart ? "Stop" : "Start Game"}
-      </button>
+      </Button>
       {gameStart && (
         <>
-          <div>
-            <h4>{getOneCountry?.name?.common}</h4>
-            <p>Total: {countCountries}</p>
-            <p>Correct: {count}</p>
-          </div>
-          {!inputRef && <p>Please type the Capital name</p>}
-          <form onSubmit={submitInput}>
-            <input type="text" ref={inputRef} />
-            <button type="submit">Submit</button>
-            <button type="button" onClick={handleNext}>
-              I do not know
-            </button>
-          </form>
+          <Card className="mt-3 p-4">
+            <Card.Header className="fw-bolder mt-3  mb-4 fs-3">
+              {getOneCountry?.name?.common}
+            </Card.Header>
+            {!inputRef && <p>Please type the Capital name</p>}
+            <Form onSubmit={submitInput}>
+              <Form.Control
+                className="p-2 mt-3"
+                style={{ width: "100%" }}
+                type="text"
+                ref={inputRef}
+                placeholder="type your answer here"
+              />
+              <div className="btn-container">
+                <Button type="submit" variant="success" className="mt-3">
+                  Submit
+                </Button>
+                <Button
+                  type="button"
+                  variant="danger"
+                  className="mt-3 "
+                  onClick={handleNext}
+                >
+                  I do not know
+                </Button>
+              </div>
+
+              <Card.Footer className="mt-3">
+                <Card.Text className="text-muted">
+                  Total: {countCountries}
+                </Card.Text>
+                <Card.Text className="text-muted">Correct: {count}</Card.Text>
+              </Card.Footer>
+            </Form>
+          </Card>
         </>
       )}
-      {!gameStart && showResult && (
-        <div>
-          <h6>Total: {countCountries}</h6>
-          <h6>Correct: {count}</h6>
-        </div>
-      )}
-    </div>
+    </Container>
   );
 };
 
