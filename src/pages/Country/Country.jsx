@@ -14,14 +14,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import locationIcon from '../../assets/location-pin.png'
+import locationIcon from "../../assets/location-pin.png";
 import styles from "./Country.module.css";
 
 const Country = () => {
   const { countriesData } = useContext(DataContext);
   const { id } = useParams();
   const navigate = useNavigate();
-
 
   const navigateBack = () => navigate(-1);
 
@@ -40,20 +39,23 @@ const Country = () => {
   // icon for marker location
   const countryIcon = new Icon({
     iconUrl: locationIcon,
-    iconSize: [38, 38]
-  })
+    iconSize: [38, 38],
+  });
 
   console.log(findOneCountry);
 
   return (
     <Container fluid className="country-container mt-5">
-      <Row>
-        <Col>
-          <Card className="shadow-sm bg-white rounded">
-            <Card.Body className="d-flex flex-column justify-content-between align-items-center">
+      <Card
+        className="shadow-sm bg-white rounded p-2"
+        style={{ width: "70vw", margin: "0 auto"}}
+      >
+        <Card.Body className="d-flex flex-column justify-content-between align-items-center">
+          <Row>
+            <Col>
               <Card.Title className="text-center fs-1 m-2">Details</Card.Title>
-    
-              <Table responsive='lg' striped bordered hover>
+
+              <Table responsive="lg" striped bordered hover>
                 <thead>
                   <tr>
                     <th>Key Points</th>
@@ -71,11 +73,15 @@ const Country = () => {
                   </tr>
                   <tr>
                     <td>Area</td>
-                    <td className="fw-bold">{findOneCountry?.area?.toLocaleString()}m2</td>
+                    <td className="fw-bold">
+                      {findOneCountry?.area?.toLocaleString()}m2
+                    </td>
                   </tr>
                   <tr>
                     <td>Population</td>
-                    <td className="fw-bold">{findOneCountry?.population?.toLocaleString()}</td>
+                    <td className="fw-bold">
+                      {findOneCountry?.population?.toLocaleString()}
+                    </td>
                   </tr>
                   <tr>
                     <td>Region</td>
@@ -83,14 +89,18 @@ const Country = () => {
                   </tr>
                   <tr>
                     <td>Borders </td>
-                    <td className="fw-bold">{findOneCountry?.borders?.toString()}</td>
+                    <td className="fw-bold">
+                      {findOneCountry?.borders?.toString()}
+                    </td>
                   </tr>
                   <tr>
                     <td>Language</td>
-                    <td className="fw-bold">{findOneCountry &&
-                      Object.values(findOneCountry?.languages).map((lang) => (
-                        <div key={lang}>{lang}</div>
-                      ))}</td>
+                    <td className="fw-bold">
+                      {findOneCountry &&
+                        Object.values(findOneCountry?.languages).map((lang) => (
+                          <div key={lang}>{lang}</div>
+                        ))}
+                    </td>
                   </tr>
                 </tbody>
               </Table>
@@ -98,38 +108,37 @@ const Country = () => {
                 rounded
                 src={findOneCountry?.flags.svg}
                 alt="image of country's flag"
-                style={{ height: "5rem", width: "auto" }}
-                className="m-3"
+                style={{ height: "10rem", width: "auto" }}
+                className="mt-5"
               />
 
-              <Button variant="primary" onClick={navigateBack}>
-                Back
+              <Button className="mt-5 m-4" variant="success" onClick={navigateBack}>
+                Back to Home
               </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Body style={{ width: "30rem" }}>
-              <Card.Title className="text-center">Map</Card.Title>
+            </Col>
+            <Col>
               <MapContainer
                 center={[lat, long]}
                 zoom={7}
-                style={{ height: "700px", width: "100%" }}
+                style={{
+                  height: "500px",
+                  width: "500px",
+                  marginLeft: "30px",
+                  marginTop: "60px",
+                }}
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                >
-                </TileLayer>
-                  <Marker position={[lat, long]} icon={countryIcon}>
-                    <Popup>{findOneCountry?.capital} - Capital City</Popup>
-                  </Marker>
+                ></TileLayer>
+                <Marker position={[lat, long]} icon={countryIcon}>
+                  <Popup>{findOneCountry?.capital} - Capital City</Popup>
+                </Marker>
               </MapContainer>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     </Container>
   );
 };
