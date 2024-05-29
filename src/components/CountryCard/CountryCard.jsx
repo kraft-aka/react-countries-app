@@ -18,6 +18,7 @@ const CountryCard = ({ name, city, flag, id }) => {
         src={flag}
         alt="image of country's flag"
         style={{ height: "10rem", width: "auto" }}
+        loading="lazy"
       />
       <Card.Body className="ml-5 md mt-3">
         <Card.Title className="fs-3 fw-bolder">{name}</Card.Title>

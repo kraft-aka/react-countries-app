@@ -1,20 +1,31 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CountryCard from "../CountryCard/CountryCard";
 import styles from "./CountriesRoll.module.css";
 import { DataContext } from "../../providers/DataProvider";
-import { v4 as uuid } from "uuid";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CountriesRoll = () => {
+  const { countriesData, isLoading } = useContext(DataContext);
   const [name, setName] = useState("");
-  const { countriesData, isLoading, errorMsg } = useContext(DataContext);
+  const [itemsToShow, setItemsToShow] = useState(12);
+  const [filteredData, setFilteredData] = useState([]);
 
-  // filtered list of countries data
-  const filteredData = countriesData.filter((data) =>
-    data?.name?.common.toLowerCase().includes(name)
-  );
+  useEffect(() => {
+    setFilteredData(
+      countriesData.filter((data) =>
+        data?.name?.common.toLowerCase().includes(name.toLowerCase())
+      )
+    );
+  }, [name, countriesData]);
+
+  const loadMoreCountries = () => {
+    setItemsToShow((prev) => prev + 12);
+  };
+
+  const displayedData = filteredData.slice(0, itemsToShow);
 
   if (isLoading) {
     return (
@@ -38,28 +49,31 @@ const CountriesRoll = () => {
           <Form.Control
             id="search"
             type="text"
-            placeholder="type here the country's name"
+            placeholder="Type here the country name"
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
         </Form.Group>
       </Form>
-      {!filteredData && !countriesData && <p>Not found</p>}
-      <div className={styles["countries-container"]}>
-        {filteredData && filteredData.length > 0 ? (
-          filteredData.map((country) => (
+      <InfiniteScroll
+        dataLength={displayedData.length}
+        next={loadMoreCountries}
+        hasMore={itemsToShow < filteredData.length}
+        loader={<Spinner animation="border" variant="success" />}
+      >
+        {!filteredData.length && <p>Not found</p>}
+        <div className={styles["countries-container"]}>
+          {displayedData.map((country) => (
             <CountryCard
-              key={uuid()}
+              key={country?.name?.common}
               name={country?.name?.common}
               city={country?.capital}
               flag={country?.flags.svg}
               id={country?.name?.common}
             />
-          ))
-        ) : (
-          <Spinner animation="border" variant="secondary" size="lg" />
-        )}
-      </div>
+          ))}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };
