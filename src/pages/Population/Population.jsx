@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../providers/DataProvider";
+import { Container, Col, Row } from 'react-bootstrap';
 import PopulationCard from "../../components/PopulationCard/PopulationCard";
 
 const Population = () => {
@@ -10,8 +11,11 @@ const Population = () => {
     );
     console.log(sortedByPopulation);
   return (
-    <div>
+    <Container fluid className="mt-5">
+      <Row lg={9} className="m-5" >
+
       {sortedByPopulation && sortedByPopulation.map((country,idx) => (
+        <Col>
         <PopulationCard
           number={idx}
           key={country?.name?.common}
@@ -19,9 +23,11 @@ const Population = () => {
           population={country.population}
           id={country?.name.common}
           flag={country.flags.svg}
-        />
-      ))}
-    </div>
+          />
+          </Col>
+          ))}
+          </Row>
+    </Container>
   );
 };
 

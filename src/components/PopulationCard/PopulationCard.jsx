@@ -5,17 +5,17 @@ import './PopulationCard.css'
 
 const PopulationCard = ({ name, population, flag, number }) => {
   return (
-    <Card style={{ width: "10rem" }} className="m-3 card-c">
+    <Card style={{ width: "10rem", height:'17rem', background:'#dbe5f0' }} className=" m-3 card-c">
       <Card.Img variant="top" src={flag} />
       <Card.Body>
-        <Card.Title className="text-center">{name}</Card.Title>
+        <Card.Title className="text-center mt-3">{name}</Card.Title>
         <Card.Text className="text-center fw-bolder text-success " >
           {population.toLocaleString()}
         </Card.Text>
         <Card.Title
           className="text-center text-muted fw-light bg-light"
           style={{
-      
+            marginBottom: '1rem',
             borderRadius: "2rem",
             width: "auto",
             height: "auto",
