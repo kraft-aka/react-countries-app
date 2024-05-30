@@ -1,9 +1,10 @@
 import { lazy, Suspense } from "react";
 import Home from "./pages/Home/Home";
+import Country from "./pages/Country/Country";
+const Population = lazy(()=> import('./pages/Population/Population'))
 const Game = lazy(() => import("./pages/Game/Game"));
 import DataProvider from "./providers/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Country from "./pages/Country/Country";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
 import { Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,6 +30,9 @@ function App() {
               </Route>
               <Route path="/game" element={<Game />}>
                 Play Game
+              </Route>
+              <Route path="/population" element={<Population />}>
+                Population 
               </Route>
             </Routes>
           </Suspense>
