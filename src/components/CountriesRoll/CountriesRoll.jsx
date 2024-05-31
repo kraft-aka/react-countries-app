@@ -5,6 +5,7 @@ import { DataContext } from "../../providers/DataProvider";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
+import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CountriesRoll = () => {
@@ -40,10 +41,10 @@ const CountriesRoll = () => {
   }
 
   return (
-    <div className={styles["container-roll"]}>
-      <Form style={{ width: "64%" }}>
-        <Form.Group className="m-3">
-          <Form.Label htmlFor="search" className="fs-5">
+    <Container fluid>
+      <Form style={{ width: "100%" }}>
+        <Form.Group className="m-5 p-0">
+          <Form.Label htmlFor="search" className="fs-5 fw-bolder">
             Search the Country
           </Form.Label>
           <Form.Control
@@ -62,19 +63,21 @@ const CountriesRoll = () => {
         loader={<Spinner animation="border" variant="success" />}
       >
         {!filteredData.length && <p>Not found</p>}
-        <div className={styles["countries-container"]}>
+        <Row lg={5} md={3} className="m-3 gx-5 gy-5">
           {displayedData.map((country) => (
-            <CountryCard
-              key={country?.name?.common}
-              name={country?.name?.common}
-              city={country?.capital}
-              flag={country?.flags.svg}
-              id={country?.name?.common}
-            />
+            <Col className="">
+              <CountryCard
+                key={country?.name?.common}
+                name={country?.name?.common}
+                city={country?.capital}
+                flag={country?.flags.svg}
+                id={country?.name?.common}
+              />
+            </Col>
           ))}
-        </div>
+        </Row>
       </InfiniteScroll>
-    </div>
+    </Container>
   );
 };
 
