@@ -63,7 +63,7 @@ const CountriesRoll = () => {
         loader={<Spinner animation="border" variant="success" />}
       >
         {!filteredData.length && <p>Not found</p>}
-        <Row lg={5} md={3} className="m-3 gx-5 gy-5">
+        <Row xl={5} lg={4} md={3} className="m-3 gx-5 gy-5 p-3">
           {displayedData.map((country) => (
             <Col className="">
               <CountryCard

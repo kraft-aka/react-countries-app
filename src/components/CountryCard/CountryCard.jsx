@@ -20,7 +20,7 @@ const CountryCard = ({ name, city, flag, id }) => {
         style={{ height: "10rem", width: "auto" }}
         loading="lazy"
       />
-      <Card.Body className="ml-5 mt-3">
+      <Card.Body className="mt-3">
         <Card.Title className="fs-3 fw-bolder">{name}</Card.Title>
         <Card.Subtitle className="fs-5 mt-1">{city}</Card.Subtitle>
       </Card.Body>
