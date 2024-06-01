@@ -7,7 +7,7 @@ const DataProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
 
-  const url = import.meta.env.VITE_URL;
+  const url = 'https://restcountries.com/v3.1/all';
 
   useEffect(() => {
     const fetchCountriesData = async () => {
