@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 
-import styles from "./Navbar.module.css";
-
 const NavbarComponent = () => {
+  const [showButton, setShowButton] = useState(false);
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollPosition / windowHeight) * 100;
+
+    if (scrollPercentage > 2) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Navbar
       bg="dark"
@@ -36,12 +55,14 @@ const NavbarComponent = () => {
             Code
           </Nav.Link>
         </Nav>
-        <Button
-          variant="outline-success"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          Back to top
-        </Button>
+        {showButton && (
+          <Button
+            variant="outline-success"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            Back to top
+          </Button>
+        )}
       </Container>
     </Navbar>
   );
