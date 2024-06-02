@@ -7,34 +7,30 @@ import "./CountryCard.css";
 
 const CountryCard = ({ name, city, flag, id }) => {
   return (
-    <Card
-      style={{ width: "15rem", height: "25rem" }}
-      border="secondary"
-      variant="info"
-      className="card-c text-center m-2"
+    <Link
+      to={`countries/${id}`}
+      style={{ color: "inherit", textDecoration: "none" }}
     >
-      <Card.Img
-        variant="top"
-        src={flag}
-        alt="image of country's flag"
-        style={{ height: "10rem", width: "auto" }}
-        loading="lazy"
-      />
-      <Card.Body className="mt-3">
-        <Card.Title className="fs-3 fw-bolder">{name}</Card.Title>
-        <Card.Subtitle className="fs-5 mt-1">{city}</Card.Subtitle>
-      </Card.Body>
-      <Link
-        to={`countries/${id}`}
-        variant="primary"
-        style={{ color: "inherit" }}
+      <Card
+        border="secondary"
+        variant="info"
+        className="card-c text-center m-2"
       >
-        <Button variant="primary" className="mb-3">
-          Learn more
-        </Button>
-      </Link>
-    </Card>
+        <Card.Img
+          variant="top"
+          src={flag}
+          alt="image of country's flag"
+          style={{ height: "10rem", width: "auto" }}
+          loading="lazy"
+        />
+        <Card.Body className="mt-3">
+          <Card.Title className="fs-3 fw-bolder">{name}</Card.Title>
+          <Card.Subtitle className="fs-5 mt-1">{city}</Card.Subtitle>
+        </Card.Body>
+      </Card>
+    </Link>
   );
 };
+
 
 export default CountryCard;
