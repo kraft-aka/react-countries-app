@@ -29,6 +29,11 @@
 .card-c {
   transition: all 0.4s ease-in-out;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+  width: 15rem;
+  min-height: 20rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-c:hover {

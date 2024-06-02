@@ -1,11 +1,11 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useMemo } from "react";
 
 const DataContext = createContext([]);
 
 const DataProvider = ({ children }) => {
   const [countriesData, setCountriesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const url = 'https://restcountries.com/v3.1/all';
 
@@ -18,16 +18,21 @@ const DataProvider = ({ children }) => {
         setCountriesData(data);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        console.error(err);
+        setErrorMsg(err.message);
+        setIsLoading(false);
       }
     };
+
     fetchCountriesData();
   }, []);
+
+  const memoizedCountriesData = useMemo(() => countriesData, [countriesData]);
 
   return (
     <DataContext.Provider
       value={{
-        countriesData,
+        countriesData: memoizedCountriesData,
         setCountriesData,
         errorMsg,
         setErrorMsg,

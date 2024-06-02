@@ -5,7 +5,7 @@ import './PopulationCard.css'
 
 const PopulationCard = ({ name, population, flag, number }) => {
   return (
-    <Card style={{ width: "10rem", height:'17rem', background:'#dbe5f0' }} className=" m-3 card-c">
+    <Card style={{ minWidth: "12rem", minHeight:'12rem', background:'#dbe5f0' }} className=" m-3 card-c">
       <Card.Img variant="top" src={flag} />
       <Card.Body>
         <Card.Title className="text-center mt-3">{name}</Card.Title>
