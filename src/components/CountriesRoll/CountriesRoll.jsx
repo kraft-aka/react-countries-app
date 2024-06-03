@@ -65,7 +65,7 @@ const CountriesRoll = () => {
         {!filteredData.length && <p>Not found</p>}
         <Row xl={5} lg={4} md={3} className="m-3 gx-5 gy-5 p-3">
           {displayedData.map((country) => (
-            <Col className="">
+            <Col className="d-flex p-2 justify-content-md-center">
               <CountryCard
                 key={country?.name?.common}
                 name={country?.name?.common}
