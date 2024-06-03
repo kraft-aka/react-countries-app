@@ -15,7 +15,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import locationIcon from "../../assets/location-pin.png";
-import styles from "./Country.module.css";
+import "./Country.css";
 
 const Country = () => {
   const { countriesData } = useContext(DataContext);
@@ -48,11 +48,11 @@ const Country = () => {
     <Container fluid className="country-container mt-5">
       <Card
         className="shadow-sm bg-white rounded p-2"
-        style={{ width: "70vw", margin: "0 auto"}}
+        style={{ width: "70vw", margin: "0 auto" }}
       >
         <Card.Body className="d-flex flex-column justify-content-between align-items-center">
           <Row>
-            <Col>
+            <Col md={1}>
               <Card.Title className="text-center fs-1 m-2">Details</Card.Title>
 
               <Table responsive="lg" striped bordered hover>

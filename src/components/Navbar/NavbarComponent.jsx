@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 
-import styles from "./Navbar.module.css";
+import  "./Navbar.css";
 
 const NavbarComponent = () => {
   return (

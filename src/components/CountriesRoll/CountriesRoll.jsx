@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import CountryCard from "../CountryCard/CountryCard";
-import styles from "./CountriesRoll.module.css";
+import  "./CountriesRoll.css";
 import { DataContext } from "../../providers/DataProvider";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Form from "react-bootstrap/Form";
