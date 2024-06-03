@@ -47,15 +47,14 @@ const Country = () => {
   return (
     <Container fluid className="country-container mt-5">
       <Card
-        className="shadow-sm bg-white rounded p-2"
-        style={{ width: "70vw", margin: "0 auto" }}
+        className="shadow-sm bg-white rounded p-2 mx-auto"
+        style={{ margin: "0 auto", maxWidth: '90vw' }}
       >
-        <Card.Body className="d-flex flex-column justify-content-between align-items-center">
-          <Row>
-            <Col md={1}>
+        <Card.Body className="d-flex flex-column justify-content-between align-items-center" style={{ minWidth: '0' }}>
+          <Row className="d-flex w-60">
+            <Col>
               <Card.Title className="text-center fs-1 m-2">Details</Card.Title>
-
-              <Table responsive="lg" striped bordered hover>
+              <Table responsive striped bordered hover>
                 <thead>
                   <tr>
                     <th>Key Points</th>
@@ -89,7 +88,7 @@ const Country = () => {
                   </tr>
                   <tr>
                     <td>Borders </td>
-                    <td className="fw-bold">
+                    <td className="fw-bold" style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
                       {findOneCountry?.borders?.toString()}
                     </td>
                   </tr>
