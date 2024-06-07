@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext} from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { DataContext } from "../../providers/DataProvider";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import "./Game.css";
@@ -12,13 +12,22 @@ const Game = () => {
   const inputRef = useRef();
 
   const { countriesData } = useContext(DataContext);
-  //console.log(countriesData);
+  console.log(countriesData);
 
   const randomIndex = (data) => Math.floor(Math.random() * data.length);
   let idx = randomIndex(countriesData);
 
   const getOneCountry = countriesData[idx];
   // console.log(getOneCountry);
+
+  // gets a random city as options
+  const getRandomCapital = () => {
+    const randomCity = countriesData[Math.floor(Math.random() * countriesData.length)]?.capital
+    return randomCity
+  }
+
+  const randomCity = getRandomCapital()
+  console.log(randomCity)
 
   const handleCount = () => setCount(count + 1);
 
@@ -72,9 +81,9 @@ const Game = () => {
     }, 1000);
   };
 
-  // useEffect(() => {
-  //   // getCountry();
-  // }, [submitInput]);
+  useEffect(() => {
+    inputRef;
+  }, []);
 
   return (
     <Container>
@@ -102,6 +111,10 @@ const Game = () => {
                 placeholder="type your answer here"
               />
               <div className="btn-container">
+                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
+                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
+                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
+                <Button className="btn mt-3" variant="outline-success">{getOneCountry?.capital}</Button>
                 <Button type="submit" variant="success" className="mt-3">
                   Submit
                 </Button>
