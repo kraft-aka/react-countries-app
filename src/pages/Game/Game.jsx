@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import { DataContext } from "../../providers/DataProvider";
-import { Form, Button, Container, Card } from "react-bootstrap";
+import { Form, Button, Container, Card, ButtonToolbar } from "react-bootstrap";
 import "./Game.css";
 
 const Game = () => {
@@ -12,7 +12,7 @@ const Game = () => {
   const inputRef = useRef();
 
   const { countriesData } = useContext(DataContext);
-  console.log(countriesData);
+  //console.log(countriesData);
 
   const randomIndex = (data) => Math.floor(Math.random() * data.length);
   let idx = randomIndex(countriesData);
@@ -22,12 +22,13 @@ const Game = () => {
 
   // gets a random city as options
   const getRandomCapital = () => {
-    const randomCity = countriesData[Math.floor(Math.random() * countriesData.length)]?.capital
-    return randomCity
-  }
+    const randomCity =
+      countriesData[Math.floor(Math.random() * countriesData.length)]?.capital;
+    return randomCity;
+  };
 
-  const randomCity = getRandomCapital()
-  console.log(randomCity)
+  const randomCity = getRandomCapital();
+  //console.log(randomCity);
 
   const handleCount = () => setCount(count + 1);
 
@@ -81,6 +82,36 @@ const Game = () => {
     }, 1000);
   };
 
+  // array of game cards
+  let options = [
+    getRandomCapital(),
+    getRandomCapital(),
+    getRandomCapital(),
+    getOneCountry?.capital,
+  ];
+
+  // shuffle array of options
+  const shuffleCities = (arr) => {
+    let currentIndex = arr.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [arr[currentIndex], arr[randomIndex]] = [
+        arr[randomIndex],
+        arr[currentIndex],
+      ];
+    }
+    return arr;
+  };
+
+  const arrayOfCities = shuffleCities(options);
+  console.log(arrayOfCities);
+
   useEffect(() => {
     inputRef;
   }, []);
@@ -110,8 +141,11 @@ const Game = () => {
                 ref={inputRef}
                 placeholder="type your answer here"
               />
-              <div className="btn-container">
-                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
+              <div
+                className="btn-container"
+                style={{ width: "70%", margin: "0 auto" }}
+              >
+                {/* <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
                 <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
                 <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
                 <Button className="btn mt-3" variant="outline-success">{getOneCountry?.capital}</Button>
@@ -125,7 +159,19 @@ const Game = () => {
                   onClick={handleNext}
                 >
                   I do not know
-                </Button>
+                </Button> */}
+                {arrayOfCities &&
+                  arrayOfCities.map((city, i) => (
+                    <Button
+                      key={i}
+                      type="submit"
+                      className="btn mt-3"
+                      variant="outline-success"
+                      data-city={city}
+                    >
+                      {city}
+                    </Button>
+                  ))}
               </div>
 
               <Card.Footer className="mt-3">
