@@ -1,6 +1,6 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../providers/DataProvider";
-import { Form, Button, Container, Card, ButtonToolbar } from "react-bootstrap";
+import { Button, Container, Card } from "react-bootstrap";
 import "./Game.css";
 
 const Game = () => {
@@ -9,7 +9,6 @@ const Game = () => {
   const [count, setCount] = useState(0);
   const [countCountries, setCountCountries] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const inputRef = useRef();
 
   const { countriesData } = useContext(DataContext);
   //console.log(countriesData);
@@ -27,7 +26,7 @@ const Game = () => {
     return randomCity;
   };
 
-  const randomCity = getRandomCapital();
+  //const randomCity = getRandomCapital();
   //console.log(randomCity);
 
   const handleCount = () => setCount(count + 1);
@@ -50,53 +49,56 @@ const Game = () => {
     setCountCountries(0);
   };
 
-  const submitInput = (e) => {
-    e.preventDefault();
-    if (!inputRef) {
-      return;
-    }
+  // const submitInput = (e) => {
+  //   e.preventDefault();
+  //   if (!inputRef) {
+  //     return;
+  //   }
 
-    if (
-      getOneCountry?.capital?.slice(0)[0].toLowerCase() ===
-      inputRef.current.value.toLowerCase()
-    ) {
-      handleCount();
-      inputRef.current.value = "";
-      handleNext();
-      // console.log(
-      //   getOneCountry?.capital.slice(0)[0].toLowerCase() === inputRef.current.value.toLowerCase()
-      // );
-    }
-    inputRef.current.value = "";
-    handleCountryCount();
-  };
+  //   if (
+  //     getOneCountry?.capital?.slice(0)[0].toLowerCase() ===
+  //     inputRef.current.value.toLowerCase()
+  //   ) {
+  //     handleCount();
+  //     inputRef.current.value = "";
+  //     handleNext();
+  //     // console.log(
+  //     //   getOneCountry?.capital.slice(0)[0].toLowerCase() === inputRef.current.value.toLowerCase()
+  //     // );
+  //   }
+  //   inputRef.current.value = "";
+  //   handleCountryCount();
+  // };
   //handleNext();
 
   const handleCheck = (e) => {
     e.preventDefault();
-    const choice = e.target.getAttribute('data-city');
+    const choice = e.target.getAttribute("data-city");
 
     if (!choice) return;
 
     if (choice === getOneCountry?.capital?.slice(0)[0]) {
       handleCount();
+    } else {
+      setTimeout(() => {
+        let nextCountry = countriesData[randomIndex(countriesData)];
+        setCurrentCountry(nextCountry);
+        handleCountryCount();
+      }, 2000);
     }
-    let nextCountry = countriesData[randomIndex(countriesData)];
-    setCurrentCountry(nextCountry);
-    handleCountryCount();
 
-    console.log(choice)
-  }
-
-  const handleNext = () => {
-    inputRef.current.value = getOneCountry?.capital?.slice(0)[0];
-    let nextCountry = countriesData[randomIndex(countriesData)];
-    setCurrentCountry(nextCountry);
-    handleCountryCount();
-    setTimeout(() => {
-      inputRef.current.value = "";
-    }, 1000);
+    console.log(choice);
   };
+
+  // const handleNext = () => {
+  //   inputRef.current.value = getOneCountry?.capital?.slice(0)[0];
+  //   let nextCountry = countriesData[randomIndex(countriesData)];
+  //   setCurrentCountry(nextCountry);
+  //   handleCountryCount();
+  //   setTimeout(() => {
+  //     inputRef.current.value = "";
+  //   }, 1000);
+  // };
 
   // array of game cards
   let options = [
@@ -130,7 +132,6 @@ const Game = () => {
 
   useEffect(() => {
     countriesData;
-    
   }, []);
 
   return (
@@ -149,57 +150,33 @@ const Game = () => {
             <Card.Header className="fw-bolder mt-3  mb-4 fs-3">
               {getOneCountry?.name?.common}
             </Card.Header>
-            {!inputRef && <p>Please type the Capital name</p>}
-            <Form onSubmit={submitInput}>
-              <Form.Control
-                className="p-2 mt-3"
-                style={{ width: "100%" }}
-                type="text"
-                ref={inputRef}
-                placeholder="type your answer here"
-              />
-              <div
-                className="btn-container"
-                style={{ width: "70%", margin: "2rem auto" }}
-              >
-                {/* <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
-                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
-                <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
-                <Button className="btn mt-3" variant="outline-success">{getOneCountry?.capital}</Button>
-                <Button type="submit" variant="success" className="mt-3">
-                  Submit
-                </Button>
-                <Button
-                  type="button"
-                  variant="danger"
-                  className="mt-3 "
-                  onClick={handleNext}
-                >
-                  I do not know
-                </Button> */}
-                {arrayOfCities &&
-                  arrayOfCities.map((city, i) => (
-                    <Button
-                      key={i}
-                      type="submit"
-                      className="btn mt-3"
-                      variant="outline-success"
-                      data-city={city}
-                      style={{ borderRadius: '2rem' }}
-                      onClick={handleCheck}
-                    >
-                      {city}
-                    </Button>
-                  ))}
-              </div>
 
-              <Card.Footer className="mt-5">
-                <Card.Text className="text-muted">
-                  Total: {countCountries}
-                </Card.Text>
-                <Card.Text className="text-muted">Correct: {count}</Card.Text>
-              </Card.Footer>
-            </Form>
+            <div
+              className="btn-container"
+              style={{ width: "70%", margin: "2rem auto" }}
+            >
+              {arrayOfCities &&
+                arrayOfCities.map((city, i) => (
+                  <Button
+                    key={i}
+                    type="submit"
+                    className="btn mt-3"
+                    variant="outline-success"
+                    data-city={city}
+                    style={{ borderRadius: "2rem" }}
+                    onClick={handleCheck}
+                  >
+                    {city}
+                  </Button>
+                ))}
+            </div>
+
+            <Card.Footer className="mt-5">
+              <Card.Text className="text-muted">
+                Total: {countCountries}
+              </Card.Text>
+              <Card.Text className="text-muted">Correct: {count}</Card.Text>
+            </Card.Footer>
           </Card>
         </>
       )}
