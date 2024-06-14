@@ -72,6 +72,22 @@ const Game = () => {
   };
   //handleNext();
 
+  const handleCheck = (e) => {
+    e.preventDefault();
+    const choice = e.target.getAttribute('data-city');
+
+    if (!choice) return;
+
+    if (choice === getOneCountry?.capital?.slice(0)[0]) {
+      handleCount();
+    }
+    let nextCountry = countriesData[randomIndex(countriesData)];
+    setCurrentCountry(nextCountry);
+    handleCountryCount();
+
+    console.log(choice)
+  }
+
   const handleNext = () => {
     inputRef.current.value = getOneCountry?.capital?.slice(0)[0];
     let nextCountry = countriesData[randomIndex(countriesData)];
@@ -113,7 +129,8 @@ const Game = () => {
   console.log(arrayOfCities);
 
   useEffect(() => {
-    inputRef;
+    countriesData;
+    
   }, []);
 
   return (
@@ -143,7 +160,7 @@ const Game = () => {
               />
               <div
                 className="btn-container"
-                style={{ width: "70%", margin: "0 auto" }}
+                style={{ width: "70%", margin: "2rem auto" }}
               >
                 {/* <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
                 <Button className="btn mt-3" variant="outline-success">{getRandomCapital()}</Button>
@@ -168,13 +185,15 @@ const Game = () => {
                       className="btn mt-3"
                       variant="outline-success"
                       data-city={city}
+                      style={{ borderRadius: '2rem' }}
+                      onClick={handleCheck}
                     >
                       {city}
                     </Button>
                   ))}
               </div>
 
-              <Card.Footer className="mt-3">
+              <Card.Footer className="mt-5">
                 <Card.Text className="text-muted">
                   Total: {countCountries}
                 </Card.Text>
