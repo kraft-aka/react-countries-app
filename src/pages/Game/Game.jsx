@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../../providers/DataProvider";
 import { Button, Container, Card } from "react-bootstrap";
 import "./Game.css";
@@ -9,15 +9,13 @@ const Game = () => {
   const [count, setCount] = useState(0);
   const [countCountries, setCountCountries] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [showCorrectCity, setShowCorrectCity] = useState(false);
+  const showRef = useRef(null);
 
   const { countriesData } = useContext(DataContext);
-  //console.log(countriesData);
 
-  const randomIndex = (data) => Math.floor(Math.random() * data.length);
-  let idx = randomIndex(countriesData);
-
-  const getOneCountry = countriesData[idx];
-  // console.log(getOneCountry);
+  const randomIndex = Math.floor(Math.random() * countriesData.length);
+  const getOneCountry = countriesData[randomIndex];
 
   // gets a random city as options
   const getRandomCapital = () => {
@@ -26,19 +24,9 @@ const Game = () => {
     return randomCity;
   };
 
-  //const randomCity = getRandomCapital();
-  //console.log(randomCity);
-
   const handleCount = () => setCount(count + 1);
 
   const handleCountryCount = () => setCountCountries(countCountries + 1);
-  // const getCountry = () => {
-  //   return countriesData[idx];
-  // }
-
-  //const handleInputChange = (e) => setInput(e.target.value);
-
-  //const handleInputRef = () => inputRef.current.value.toLowerCase();
 
   const handleShowResult = () => setShowResult(!showResult);
 
@@ -49,56 +37,25 @@ const Game = () => {
     setCountCountries(0);
   };
 
-  // const submitInput = (e) => {
-  //   e.preventDefault();
-  //   if (!inputRef) {
-  //     return;
-  //   }
-
-  //   if (
-  //     getOneCountry?.capital?.slice(0)[0].toLowerCase() ===
-  //     inputRef.current.value.toLowerCase()
-  //   ) {
-  //     handleCount();
-  //     inputRef.current.value = "";
-  //     handleNext();
-  //     // console.log(
-  //     //   getOneCountry?.capital.slice(0)[0].toLowerCase() === inputRef.current.value.toLowerCase()
-  //     // );
-  //   }
-  //   inputRef.current.value = "";
-  //   handleCountryCount();
-  // };
-  //handleNext();
-
   const handleCheck = (e) => {
     e.preventDefault();
     const choice = e.target.getAttribute("data-city");
 
-    if (!choice) return;
-
     if (choice === getOneCountry?.capital?.slice(0)[0]) {
       handleCount();
-    } else {
-      setTimeout(() => {
-        let nextCountry = countriesData[randomIndex(countriesData)];
-        setCurrentCountry(nextCountry);
-        handleCountryCount();
-      }, 2000);
+      setShowCorrectCity(false);
+      showRef.current = "";
     }
+    handleCountryCount();
+    let nextCountry = countriesData[randomIndex];
+    setCurrentCountry(nextCountry);
+    console.log(nextCountry);
 
-    console.log(choice);
+    if (choice != getOneCountry?.capital?.slice(0)[0]) {
+      showRef.current = getOneCountry?.capital?.slice(0)[0];
+      setShowCorrectCity(true);
+    }
   };
-
-  // const handleNext = () => {
-  //   inputRef.current.value = getOneCountry?.capital?.slice(0)[0];
-  //   let nextCountry = countriesData[randomIndex(countriesData)];
-  //   setCurrentCountry(nextCountry);
-  //   handleCountryCount();
-  //   setTimeout(() => {
-  //     inputRef.current.value = "";
-  //   }, 1000);
-  // };
 
   // array of game cards
   let options = [
@@ -128,11 +85,21 @@ const Game = () => {
   };
 
   const arrayOfCities = shuffleCities(options);
-  console.log(arrayOfCities);
+  //console.log(arrayOfCities);
 
   useEffect(() => {
     countriesData;
   }, []);
+
+  // useEffect(() => {
+  //   let timer;
+  //   if (showCorrectCity) {
+  //     timer = setTimeout(() => {
+  //       setShowCorrectCity(false);
+  //     }, 2000);
+  //   }
+  //   return () => clearTimeout(timer);
+  // }, [showCorrectCity]);
 
   return (
     <Container>
@@ -150,7 +117,21 @@ const Game = () => {
             <Card.Header className="fw-bolder mt-3  mb-4 fs-3">
               {getOneCountry?.name?.common}
             </Card.Header>
-
+            {showCorrectCity && (
+              <Card.Text
+                ref={showRef}
+                className="text-center fs-3 mb-0 p-0"
+                style={{
+                  background: "#ccc",
+                  width: "70%",
+                  textAlign: "center",
+                  alignSelf: "center",
+                  borderRadius: "2rem",
+                }}
+              >
+                {showRef.current}
+              </Card.Text>
+            )}
             <div
               className="btn-container"
               style={{ width: "70%", margin: "2rem auto" }}
@@ -170,7 +151,6 @@ const Game = () => {
                   </Button>
                 ))}
             </div>
-
             <Card.Footer className="mt-5">
               <Card.Text className="text-muted">
                 Total: {countCountries}
