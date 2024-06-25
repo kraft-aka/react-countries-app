@@ -15,7 +15,7 @@ const Population = () => {
       <Row lg={9} className="m-5" >
 
       {sortedByPopulation && sortedByPopulation.map((country,idx) => (
-        <Col>
+        <Col key={country?.name?.common}>
         <PopulationCard
           number={idx}
           key={country?.name?.common}
