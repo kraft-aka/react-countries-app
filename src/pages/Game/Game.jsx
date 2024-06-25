@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../../providers/DataProvider";
 import { Button, Container, Card } from "react-bootstrap";
+import ResultModal from "../../components/ResultModal/ResultModal";
 import "./Game.css";
 
 const Game = () => {
@@ -160,6 +161,7 @@ const Game = () => {
           </Card>
         </>
       )}
+      { !gameStart && <ResultModal count={count} countCountries={countCountries}/> }
     </Container>
   );
 };
