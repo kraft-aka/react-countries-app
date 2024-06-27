@@ -141,6 +141,7 @@ const Game = () => {
           type="button"
           variant="dark"
           className="mt-5"
+          style={{ marginLeft: '1rem'}}
           onClick={handleStopGame}
         >
           Stop
