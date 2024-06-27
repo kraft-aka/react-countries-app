@@ -1,10 +1,22 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const ResultModal = ({ count, countriesCount, show }) => {
-  console.log(count, countriesCount);
+const ResultModal = ({ count, countriesCount, show, handleClose }) => {
+
+  console.log(count, countriesCount, show, handleClose);
+
+
   return (
-    <Modal show={show} onHide={()=>console.log('hide')}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      style={{
+        background: "#111",
+        display: "block",
+       // position: "initial",
+        opacity: "1",
+      }}
+    >
       <Modal.Header closeButton>
         <Modal.Title>The Results of the game:</Modal.Title>
       </Modal.Header>
@@ -16,11 +28,13 @@ const ResultModal = ({ count, countriesCount, show }) => {
           Number of Correct Answers: <strong>{count}</strong>
         </p>
         <p>
-          Number of Incorrect Answers: <strong>{countriesCount - count}</strong>
+          Number of Incorrect Answers: <strong>{countriesCount}</strong>
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary">Close</Button>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );

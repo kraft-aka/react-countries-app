@@ -11,6 +11,7 @@ const Game = () => {
   const [countCountries, setCountCountries] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [showCorrectCity, setShowCorrectCity] = useState(false);
+  const [show, setShow] = useState(false);
   const showRef = useRef(null);
 
   const { countriesData } = useContext(DataContext);
@@ -18,6 +19,7 @@ const Game = () => {
   const randomIndex = Math.floor(Math.random() * countriesData.length);
   const getOneCountry = countriesData[randomIndex];
 
+  console.log(typeof countCountries);
   // gets a random city as options
   const getRandomCapital = () => {
     const randomCity =
@@ -27,15 +29,30 @@ const Game = () => {
 
   const handleCount = () => setCount(count + 1);
 
-  const handleCountryCount = () => setCountCountries(countCountries + 1);
+  //const handleCountryCount = () => setCountCountries(countCountries + 1);
 
   const handleShowResult = () => setShowResult(!showResult);
 
+  const startNewGame = () => {
+    const randomIndex = Math.floor(Math.random() * countriesData.length);
+    const newCountry = countriesData[randomIndex];
+    setCurrentCountry(newCountry);
+    setShowCorrectCity(false);
+    showRef.current = "";
+  };
+
   const handleStartGame = () => {
-    setGameStart(!gameStart);
+    setGameStart(true);
     handleShowResult();
     setCount(0);
     setCountCountries(0);
+    setShow(false);
+    startNewGame();
+  };
+
+  const handleStopGame = () => {
+    setShow(true);
+    setGameStart(false);
   };
 
   const handleCheck = (e) => {
@@ -47,7 +64,7 @@ const Game = () => {
       setShowCorrectCity(false);
       showRef.current = "";
     }
-    handleCountryCount();
+    setCountCountries(countCountries + 1);
     let nextCountry = countriesData[randomIndex];
     setCurrentCountry(nextCountry);
     console.log(nextCountry);
@@ -56,6 +73,8 @@ const Game = () => {
       showRef.current = getOneCountry?.capital?.slice(0)[0];
       setShowCorrectCity(true);
     }
+    setCountCountries(countCountries + 1);
+    // startNewGame();
   };
 
   // array of game cards
@@ -88,19 +107,13 @@ const Game = () => {
   const arrayOfCities = shuffleCities(options);
   //console.log(arrayOfCities);
 
-  useEffect(() => {
-    countriesData;
-  }, []);
+  const handleClose = () => setShow(false);
 
-  // useEffect(() => {
-  //   let timer;
-  //   if (showCorrectCity) {
-  //     timer = setTimeout(() => {
-  //       setShowCorrectCity(false);
-  //     }, 2000);
-  //   }
-  //   return () => clearTimeout(timer);
-  // }, [showCorrectCity]);
+  useEffect(() => {
+    if (gameStart) {
+      startNewGame();
+    }
+  }, [gameStart]);
 
   return (
     <Container>
@@ -110,9 +123,19 @@ const Game = () => {
         className="mt-5"
         onClick={handleStartGame}
       >
-        {gameStart ? "Stop" : "Start Game"}
+        Start Game
       </Button>
       {gameStart && (
+        <Button
+          type="button"
+          variant="dark"
+          className="mt-5"
+          onClick={handleStopGame}
+        >
+          Stop
+        </Button>
+      )}
+      {gameStart && !show && (
         <>
           <Card className="mt-3 p-4">
             <Card.Header className="fw-bolder mt-3  mb-4 fs-3">
@@ -161,7 +184,14 @@ const Game = () => {
           </Card>
         </>
       )}
-      { !gameStart && <ResultModal count={count} countCountries={countCountries}/> }
+      {!gameStart && show && (
+        <ResultModal
+          count={count}
+          countCountries={countCountries}
+          show={show}
+          handleClose={handleClose}
+        />
+      )}
     </Container>
   );
 };
