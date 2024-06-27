@@ -14,12 +14,14 @@ const Game = () => {
   const [show, setShow] = useState(false);
   const showRef = useRef(null);
 
+  // countries data from context
   const { countriesData } = useContext(DataContext);
 
+  // gets random index and one country
   const randomIndex = Math.floor(Math.random() * countriesData.length);
   const getOneCountry = countriesData[randomIndex];
 
-  console.log(typeof countCountries);
+  console.log(countCountries);
   // gets a random city as options
   const getRandomCapital = () => {
     const randomCity =
@@ -31,8 +33,10 @@ const Game = () => {
 
   //const handleCountryCount = () => setCountCountries(countCountries + 1);
 
+  // handles right answer if user pick wrong one
   const handleShowResult = () => setShowResult(!showResult);
 
+  // handles new game
   const startNewGame = () => {
     const randomIndex = Math.floor(Math.random() * countriesData.length);
     const newCountry = countriesData[randomIndex];
@@ -41,6 +45,7 @@ const Game = () => {
     showRef.current = "";
   };
 
+  // on game start
   const handleStartGame = () => {
     setGameStart(true);
     handleShowResult();
@@ -50,11 +55,17 @@ const Game = () => {
     startNewGame();
   };
 
+  // handles stop game and shows modal component
   const handleStopGame = () => {
+
+    if (countCountries == 0) {
+      return; 
+    }
     setShow(true);
     setGameStart(false);
   };
 
+  // checks if the user's answer is correct and counts the country questions
   const handleCheck = (e) => {
     e.preventDefault();
     const choice = e.target.getAttribute("data-city");
@@ -74,7 +85,6 @@ const Game = () => {
       setShowCorrectCity(true);
     }
     setCountCountries(countCountries + 1);
-    // startNewGame();
   };
 
   // array of game cards
@@ -107,6 +117,7 @@ const Game = () => {
   const arrayOfCities = shuffleCities(options);
   //console.log(arrayOfCities);
 
+  // handles hide for modal component
   const handleClose = () => setShow(false);
 
   useEffect(() => {
@@ -197,7 +208,3 @@ const Game = () => {
 };
 
 export default Game;
-
-//TODO
-// Conditionally render the total result after user clicks stop buttton
-// MODAL?? maybe
