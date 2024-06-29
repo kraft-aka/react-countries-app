@@ -17,22 +17,21 @@ const Game = () => {
   // countries data from context
   const { countriesData } = useContext(DataContext);
 
-  
   // gets random index and one country
   const randomIndex = Math.floor(Math.random() * countriesData.length);
   const getOneCountry = countriesData[randomIndex];
-  
-  
+
   // gets a random city as options
+  const clonedCountriesData = structuredClone(countriesData);
   const getRandomCapital = () => {
     // creates a copy of countriesData
-    const clonedCountriesData = structuredClone(countriesData);
     const randomIndex = Math.floor(Math.random() * clonedCountriesData.length);
-    const randomCity = clonedCountriesData[randomIndex]?.capital;
+    const randomCity =
+      clonedCountriesData[randomIndex].capital ||
+      clonedCountriesData[randomIndex]?.region;
     clonedCountriesData.splice(randomIndex, 1);
     return randomCity;
   };
-
 
   const handleCount = () => setCount(count + 1);
 
@@ -74,7 +73,7 @@ const Game = () => {
     e.preventDefault();
     const choice = e.target.getAttribute("data-city");
 
-    if (choice === getOneCountry?.capital?.slice(0)[0]) {
+    if (choice === getOneCountry?.capital?.at(0)) {
       handleCount();
       setShowCorrectCity(false);
       showRef.current = "";
