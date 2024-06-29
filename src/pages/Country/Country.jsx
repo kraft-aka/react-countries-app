@@ -78,7 +78,7 @@ const Country = () => {
                   <tr>
                     <td>Area</td>
                     <td className="fw-bold">
-                      {findOneCountry?.area?.toLocaleString()}m2
+                      {findOneCountry?.area?.toLocaleString()} km2
                     </td>
                   </tr>
                   <tr>
@@ -107,6 +107,33 @@ const Country = () => {
                         Object.values(findOneCountry?.languages).map((lang) => (
                           <div key={lang}>{lang}</div>
                         ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Member of UN </td>
+                    <td
+                      className="fw-bold"
+                      style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                    >
+                      {findOneCountry?.unMember ? 'Member' : 'Not a member'}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Abbreviated Version </td>
+                    <td
+                      className="fw-bold"
+                      style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                    >
+                      {findOneCountry?.cca3}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Currency </td>
+                    <td
+                      className="fw-bold"
+                      style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                    >
+                      {findOneCountry?.currencies?.XPF?.symbol}
                     </td>
                   </tr>
                 </tbody>
