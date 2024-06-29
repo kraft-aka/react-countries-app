@@ -17,17 +17,22 @@ const Game = () => {
   // countries data from context
   const { countriesData } = useContext(DataContext);
 
+  
   // gets random index and one country
   const randomIndex = Math.floor(Math.random() * countriesData.length);
   const getOneCountry = countriesData[randomIndex];
-
-  console.log(countCountries);
+  
+  
   // gets a random city as options
   const getRandomCapital = () => {
-    const randomCity =
-      countriesData[Math.floor(Math.random() * countriesData.length)]?.capital;
+    // creates a copy of countriesData
+    const clonedCountriesData = structuredClone(countriesData);
+    const randomIndex = Math.floor(Math.random() * clonedCountriesData.length);
+    const randomCity = clonedCountriesData[randomIndex]?.capital;
+    clonedCountriesData.splice(randomIndex, 1);
     return randomCity;
   };
+
 
   const handleCount = () => setCount(count + 1);
 
@@ -57,9 +62,8 @@ const Game = () => {
 
   // handles stop game and shows modal component
   const handleStopGame = () => {
-
     if (countCountries == 0) {
-      return; 
+      return;
     }
     setShow(true);
     setGameStart(false);
@@ -141,7 +145,7 @@ const Game = () => {
           type="button"
           variant="dark"
           className="mt-5"
-          style={{ marginLeft: '1rem'}}
+          style={{ marginLeft: "1rem" }}
           onClick={handleStopGame}
         >
           Stop
