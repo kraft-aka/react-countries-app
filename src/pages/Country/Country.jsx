@@ -29,8 +29,8 @@ const Country = () => {
     (country) => country.name?.common === id
   );
 
-  const lat = findOneCountry?.capitalInfo?.latlng[0];
-  const long = findOneCountry?.capitalInfo?.latlng[1];
+  const lat = findOneCountry?.latlng[0];
+  const long = findOneCountry?.latlng[1];
 
   if (!findOneCountry) {
     return null;
@@ -48,9 +48,12 @@ const Country = () => {
     <Container fluid className="country-container mt-5">
       <Card
         className="shadow-sm bg-white rounded p-2 mx-auto"
-        style={{ margin: "0 auto", maxWidth: '90vw' }}
+        style={{ margin: "0 auto", maxWidth: "90vw" }}
       >
-        <Card.Body className="d-flex flex-column justify-content-between align-items-center" style={{ minWidth: '0' }}>
+        <Card.Body
+          className="d-flex flex-column justify-content-between align-items-center"
+          style={{ minWidth: "0" }}
+        >
           <Row className="d-flex w-60">
             <Col>
               <Card.Title className="text-center fs-1 m-2">Details</Card.Title>
@@ -68,7 +71,9 @@ const Country = () => {
                   </tr>
                   <tr>
                     <td>Capital City</td>
-                    <td className="fw-bold">{findOneCountry?.capital}</td>
+                    <td className="fw-bold">
+                      {findOneCountry?.capital || findOneCountry?.name?.common}
+                    </td>
                   </tr>
                   <tr>
                     <td>Area</td>
@@ -88,7 +93,10 @@ const Country = () => {
                   </tr>
                   <tr>
                     <td>Borders </td>
-                    <td className="fw-bold" style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
+                    <td
+                      className="fw-bold"
+                      style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                    >
                       {findOneCountry?.borders?.toString()}
                     </td>
                   </tr>
@@ -111,7 +119,11 @@ const Country = () => {
                 className="mt-5"
               />
 
-              <Button className="mt-5 m-4" variant="success" onClick={navigateBack}>
+              <Button
+                className="mt-5 m-4"
+                variant="success"
+                onClick={navigateBack}
+              >
                 Back to Home
               </Button>
             </Col>
