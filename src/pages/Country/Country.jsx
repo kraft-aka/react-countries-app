@@ -42,6 +42,30 @@ const Country = () => {
     iconSize: [38, 38],
   });
 
+  // parse country currency's name
+  const getCurrencyIndex = JSON.stringify(findOneCountry?.currencies).indexOf(
+    "name"
+  );
+  const getCommasIndex = JSON.stringify(findOneCountry?.currencies).indexOf(
+    ","
+  );
+  const getCurrencyName = JSON.stringify(findOneCountry?.currencies).slice(
+    16,
+    getCommasIndex - 1
+  );
+
+  // parse currency's symbol
+  const getCurrencySymbolIndex = JSON.stringify(
+    findOneCountry?.currencies
+  ).indexOf("symbol");
+  const getSymbolIndex = JSON.stringify(findOneCountry?.currencies).indexOf(
+    "}"
+  );
+  const getCurrencySymbol = JSON.stringify(findOneCountry?.currencies).slice(
+    getCurrencySymbolIndex + 9,
+    getSymbolIndex - 1
+  );
+
   console.log(findOneCountry);
 
   return (
@@ -115,7 +139,7 @@ const Country = () => {
                       className="fw-bold"
                       style={{ whiteSpace: "normal", wordWrap: "break-word" }}
                     >
-                      {findOneCountry?.unMember ? 'Member' : 'Not a member'}
+                      {findOneCountry?.unMember ? "Member" : "Not a member"}
                     </td>
                   </tr>
                   <tr>
@@ -133,7 +157,7 @@ const Country = () => {
                       className="fw-bold"
                       style={{ whiteSpace: "normal", wordWrap: "break-word" }}
                     >
-                      {findOneCountry?.currencies?.XPF?.symbol}
+                      {getCurrencyName}|{getCurrencySymbol}
                     </td>
                   </tr>
                 </tbody>
