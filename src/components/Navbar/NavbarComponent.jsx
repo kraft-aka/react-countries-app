@@ -28,6 +28,9 @@ const NavbarComponent = () => {
           <Nav.Link as={Link} to="/population">
             Population
           </Nav.Link>
+          <Nav.Link as={Link} to="/facts">
+            Some Facts
+          </Nav.Link>
           <Nav.Link
             as={Link}
             to="https://github.com/kraft-aka/react-countries-app"

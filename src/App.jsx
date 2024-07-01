@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import Country from "./pages/Country/Country";
 const Population = lazy(()=> import('./pages/Population/Population'))
 const Game = lazy(() => import("./pages/Game/Game"));
+const FactsData = lazy(()=> import('./pages/FactsData/FactsData') )
 import DataProvider from "./providers/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
@@ -33,6 +34,9 @@ function App() {
               </Route>
               <Route path="/population" element={<Population />}>
                 Population 
+              </Route>
+              <Route path="/facts" element={<FactsData />}>
+                Some Facts 
               </Route>
             </Routes>
           </Suspense>
