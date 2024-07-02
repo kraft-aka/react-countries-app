@@ -38,10 +38,16 @@ const FactsData = () => {
 
   // data of landlocked and have an access to the ocean or sea countries
 
-  const isNotLandlocked = countriesData.filter(country=> !country.landlocked);
-  const isLandlocked = countriesData.filter(country=> country.landlocked);
+  const isNotLandlocked = countriesData.filter(
+    (country) => !country.landlocked
+  );
+  const isLandlocked = countriesData.filter((country) => country.landlocked);
 
-  console.log(countriesData);
+
+  // array of languages
+  const langs = countriesData.flatMap(({ languages }) => languages);
+
+  console.log(langs);
   return (
     <div>
       <h1>Some numeric data about countries</h1>
@@ -55,7 +61,10 @@ const FactsData = () => {
         countriesInAfrica={countriesInAfrica}
         countriesInAntarctica={countriesInAntarctica}
       />
-      <AccessToOceanFact isNotLandlocked={isNotLandlocked} isLandlocked={isLandlocked}/>
+      <AccessToOceanFact
+        isNotLandlocked={isNotLandlocked}
+        isLandlocked={isLandlocked}
+      />
     </div>
   );
 };
