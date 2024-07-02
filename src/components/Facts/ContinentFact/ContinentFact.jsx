@@ -58,10 +58,11 @@ const ContinentFact = ({
     ],
   };
 
+
+
   return (
     <div>
-      <h2>Number of Continents per Continent</h2>
-
+      <h2>Number of Countries per Continent</h2>
       <section style={{ width: "350px" }}>
         {<Pie data={dataSet} options={{ responsive: true }} />}
       </section>
