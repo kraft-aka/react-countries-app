@@ -47,7 +47,7 @@ const FactsData = () => {
   // array of languages
   const langs = countriesData.flatMap(({ languages }) => languages);
 
-  console.log(langs);
+  console.log(countriesData);
   return (
     <div>
       <h1>Some numeric data about countries</h1>
