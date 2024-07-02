@@ -61,7 +61,7 @@ const ContinentFact = ({
 
   return (
     <Card
-      className="text-center m-4 card-container"
+      className="text-center m-1 card-container"
       style={{ width: "100%", height: "100%" }}
     >
       <Card.Header>
@@ -74,6 +74,9 @@ const ContinentFact = ({
           {<Pie data={dataSet}  options={{ responsive: true }} />}
         </section>
       </Card.Body>
+      <Card.Footer>
+        
+      </Card.Footer>
     </Card>
   );
 };

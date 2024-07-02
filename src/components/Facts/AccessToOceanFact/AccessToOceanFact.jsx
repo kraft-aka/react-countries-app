@@ -1,6 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Card, Button, ListGroup } from "react-bootstrap";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -18,10 +19,24 @@ const AccessToOceanFact = ({ isNotLandlocked, isLandlocked }) => {
     ],
   };
   return (
-    <div>
-      <h2>Countries that are landlocked anf have an access to the Ocean</h2>
-      <section style={{ width: "350px" }}>{<Pie data={dataSet} />}</section>
-    </div>
+    <Card
+      className="text-center m-1 card-container"
+      style={{ width: "100%", height: "100%" }}
+    >
+      <Card.Header>
+        <Card.Title className="fs-3">
+          Landlocked and Coastal Countries
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <section>
+          {<Pie data={dataSet} options={{ responsive: true }} />}
+        </section>
+      </Card.Body>
+      <Card.Footer>
+
+      </Card.Footer>
+    </Card>
   );
 };
 

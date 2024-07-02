@@ -56,7 +56,7 @@ const FactsData = () => {
   console.log(countriesData);
   return (
     <Container fluid>
-      <Card className="mt-4 p-2 pb-5 ">
+      <Card className="m-3 p-2 pb-5">
         <Card.Header className="p-1 m-0">
           <Card.Title className="m-4 text-center fs-1">
             Some numeric data about countries

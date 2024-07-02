@@ -15,7 +15,7 @@ const UNFact = ({ isUnMember, isNotUnMember }) => {
   }
 
   const dataSet = {
-    labels: ["UN Members", "not Members"],
+    labels: ["UN Members", "not UN Members"],
     datasets: [
       {
         label: "Number of countries",
@@ -28,16 +28,14 @@ const UNFact = ({ isUnMember, isNotUnMember }) => {
   };
 
   return (
-    <Card className="text-center m-4 card-container" style={{ width: "100%", height:'100%' }}>
+    <Card
+      className="text-center m-1 card-container"
+      style={{ width: "100%", height: "100%" }}
+    >
       <Card.Header className="fs-3">UN Members and Not Members</Card.Header>
-      <Card.Body >
+      <Card.Body>
         <div className="chart-container">
-          {
-            <Pie
-              data={dataSet}
-              options={{ responsive: true }}
-            />
-          }
+          {<Pie data={dataSet} options={{ responsive: true }} />}
         </div>
       </Card.Body>
       <ListGroup variant="flush">
