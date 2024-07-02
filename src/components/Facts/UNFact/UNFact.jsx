@@ -28,9 +28,9 @@ const UNFact = ({ isUnMember, isNotUnMember }) => {
   };
 
   return (
-    <Card className="text-center m-4 card-container" style={{ width: "40%" }}>
+    <Card className="text-center m-4 card-container" style={{ width: "100%", height:'100%' }}>
       <Card.Header className="fs-3">UN Members and Not Members</Card.Header>
-      <Card.Body style={{ width: "500px" }}>
+      <Card.Body >
         <div className="chart-container">
           {
             <Pie
