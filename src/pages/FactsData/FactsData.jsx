@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { DataContext } from "../../providers/DataProvider";
 import UNFact from "../../components/Facts/UNFact/UNFact";
 import ContinentFact from "../../components/Facts/ContinentFact/ContinentFact";
+import AccessToOceanFact from "../../components/Facts/AccessToOceanFact/AccessToOceanFact";
 
 const FactsData = () => {
   const { countriesData } = useContext(DataContext);
@@ -35,6 +36,11 @@ const FactsData = () => {
     (country) => country.continents == "Antarctica"
   );
 
+  // data of landlocked and have an access to the ocean or sea countries
+
+  const isNotLandlocked = countriesData.filter(country=> !country.landlocked);
+  const isLandlocked = countriesData.filter(country=> country.landlocked);
+
   console.log(countriesData);
   return (
     <div>
@@ -49,6 +55,7 @@ const FactsData = () => {
         countriesInAfrica={countriesInAfrica}
         countriesInAntarctica={countriesInAntarctica}
       />
+      <AccessToOceanFact isNotLandlocked={isNotLandlocked} isLandlocked={isLandlocked}/>
     </div>
   );
 };
