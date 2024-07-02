@@ -35,7 +35,7 @@ const UNFact = ({ isUnMember, isNotUnMember }) => {
           {
             <Pie
               data={dataSet}
-              options={{ responsive: true, maintainAspectRatio: false }}
+              options={{ responsive: true }}
             />
           }
         </div>

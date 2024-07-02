@@ -1,6 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Card, Button, ListGroup } from "react-bootstrap";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -58,15 +59,22 @@ const ContinentFact = ({
     ],
   };
 
-
-
   return (
-    <div>
-      <h2>Number of Countries per Continent</h2>
-      <section style={{ width: "350px" }}>
-        {<Pie data={dataSet} options={{ responsive: true }} />}
-      </section>
-    </div>
+    <Card
+      className="text-center m-4 card-container"
+      style={{ width: "100%", height: "100%" }}
+    >
+      <Card.Header>
+        <Card.Title className="fs-3">
+          Number of Countries per Continent
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <section>
+          {<Pie data={dataSet}  options={{ responsive: true }} />}
+        </section>
+      </Card.Body>
+    </Card>
   );
 };
 
