@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
 import { Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               </Route>
             </Routes>
           </Suspense>
+          <Toaster position="top-right" />
         </DataProvider>
       </BrowserRouter>
     </>

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../../providers/DataProvider";
 import { Button, Container, Card } from "react-bootstrap";
 import ResultModal from "../../components/ResultModal/ResultModal";
+import toast from "react-hot-toast";
 import "./Game.css";
 
 const Game = () => {
@@ -29,7 +30,7 @@ const Game = () => {
     const randomCity =
       clonedCountriesData[randomIndex].capital ||
       clonedCountriesData[randomIndex]?.region ||
-      clonedCountriesData[randomIndex]?.name?.common ;
+      clonedCountriesData[randomIndex]?.name?.common;
     clonedCountriesData.splice(randomIndex, 1);
     return randomCity;
   };
@@ -85,8 +86,13 @@ const Game = () => {
     console.log(nextCountry);
 
     if (choice != getOneCountry?.capital?.slice(0)[0]) {
-      showRef.current = getOneCountry?.capital?.slice(0)[0];
-      setShowCorrectCity(true);
+      // showRef.current = getOneCountry?.capital?.slice(0)[0];
+      // setShowCorrectCity(true);
+      toast.error(
+        `Error, the right capital city is: ${
+          getOneCountry?.capital?.slice(0)[0]
+        }`
+      );
     }
     setCountCountries(countCountries + 1);
   };
