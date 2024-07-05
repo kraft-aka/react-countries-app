@@ -69,7 +69,7 @@ const CountriesRoll = () => {
               <CountryCard
                 key={country?.name?.common}
                 name={country?.name?.common}
-                city={country?.capital}
+                city={country?.capital || country?.region }
                 flag={country?.flags.svg}
                 id={country?.name?.common}
               />
