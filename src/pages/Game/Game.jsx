@@ -28,7 +28,8 @@ const Game = () => {
     const randomIndex = Math.floor(Math.random() * clonedCountriesData.length);
     const randomCity =
       clonedCountriesData[randomIndex].capital ||
-      clonedCountriesData[randomIndex]?.region;
+      clonedCountriesData[randomIndex]?.region ||
+      clonedCountriesData[randomIndex]?.name?.common ;
     clonedCountriesData.splice(randomIndex, 1);
     return randomCity;
   };
