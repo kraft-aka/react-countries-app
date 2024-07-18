@@ -53,7 +53,7 @@ const FactsData = () => {
   // array of languages
   const langs = countriesData.flatMap(({ languages }) => languages);
 
-  console.log(countriesData);
+  //console.log(countriesData);
   return (
     <Container fluid>
       <Card className="m-3 p-2 pb-5">
