@@ -1,10 +1,9 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const ResultModal = ({ count, countriesCount, show, handleClose }) => {
-
-  console.log(count, countriesCount, show, handleClose);
-
+const ResultModal = ({ count, countCountries, show, handleClose }) => {
+  // calculates the number of incorrect answers
+  const incorrectAnswers = countCountries - count;
 
   return (
     <Modal
@@ -13,7 +12,7 @@ const ResultModal = ({ count, countriesCount, show, handleClose }) => {
       style={{
         background: "#111",
         display: "block",
-       // position: "initial",
+        // position: "initial",
         opacity: "1",
       }}
     >
@@ -22,13 +21,13 @@ const ResultModal = ({ count, countriesCount, show, handleClose }) => {
       </Modal.Header>
       <Modal.Body>
         <p>
-          Number of Questions: <strong>{countriesCount}</strong>
+          Number of Questions: <strong>{countCountries}</strong>
         </p>
         <p>
           Number of Correct Answers: <strong>{count}</strong>
         </p>
         <p>
-          Number of Incorrect Answers: <strong>{countriesCount}</strong>
+          Number of Incorrect Answers: <strong>{incorrectAnswers}</strong>
         </p>
       </Modal.Body>
       <Modal.Footer>

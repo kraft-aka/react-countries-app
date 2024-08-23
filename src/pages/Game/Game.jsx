@@ -18,6 +18,9 @@ const Game = () => {
   // countries data from context
   const { countriesData } = useContext(DataContext);
 
+  // handler for count of correct answers
+  const handleCount = () => setCount(count + 1);
+
   // gets random index and one country
   const randomIndex = Math.floor(Math.random() * countriesData.length);
   const getOneCountry = countriesData[randomIndex];
@@ -34,10 +37,6 @@ const Game = () => {
     clonedCountriesData.splice(randomIndex, 1);
     return randomCity;
   };
-
-  const handleCount = () => setCount(count + 1);
-
-  //const handleCountryCount = () => setCountCountries(countCountries + 1);
 
   // handles right answer if user pick wrong one
   const handleShowResult = () => setShowResult(!showResult);
@@ -80,7 +79,7 @@ const Game = () => {
       setShowCorrectCity(false);
       showRef.current = "";
     }
-    setCountCountries(countCountries + 1);
+    setCountCountries((prev) => prev + 1);
     let nextCountry = countriesData[randomIndex];
     setCurrentCountry(nextCountry);
     console.log(nextCountry);
@@ -94,7 +93,6 @@ const Game = () => {
         }`
       );
     }
-    setCountCountries(countCountries + 1);
   };
 
   // array of game cards
@@ -125,7 +123,6 @@ const Game = () => {
   };
 
   const arrayOfCities = shuffleCities(options);
-  //console.log(arrayOfCities);
 
   // handles hide for modal component
   const handleClose = () => setShow(false);
